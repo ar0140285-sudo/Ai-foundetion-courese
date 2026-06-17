@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificates</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+        <div class="logo">Akash Rathod</div>
+        
+        <div class="hamburger" id="hamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="certificates.html">Certificates</a></li>
+            <li><a href="private.html">Private</a></li>
+        </ul>
+    </nav>
+  
+
+    <section class="main-section animate-fade-in">
+        <div class="liquid-glass text-center" style="max-width: 800px; width: 100%;">
+            <h1>📜 My Achievements</h1>
+            <p>Verifiable certificates in web </p>
+        </div>
+
+        <div class="cert-grid text-center">
+            <div class="liquid-glass">
+                <div class="img-box"><img src="assets/certificates/cert1.jpg" alt="Meta Certificate"></div>
+                <div class="desc-box">
+                    <h3>Foundations of Generative AI</h3>
+                    <p style="margin-bottom: 15px;">     </p>
+                    <a href="https://www.coursera.org" target="_blank" class="glass-btn">View Online →</a>
+                </div>
+            </div>
+            <div class="liquid-glass">
+                <div class="img-box"><img src="assets/certificates/cert2.jpg" alt="C++ Certificate"></div>
+                <div class="desc-box">
+                    <h3>AI Foundation (AIF) Cybersecrity and Global impacts</h3>
+                    <p style="margin-bottom: 15px;">     </p>
+                    <a href="https://code.org/en-US" target="_blank" class="glass-btn">View Online →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            // Menu ko dikhane ya chhupane ka kaam
+            navLinks.classList.toggle('nav-active');
+            // 3 line ko cross (X) banane ka kaam
+            hamburger.classList.toggle('toggle');
+        });
+    </script>
+
+
+
+
+</body>
+</html>
