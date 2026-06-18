@@ -217,3 +217,82 @@ html, body {
     h1 { font-size: 24px; }
     h2 { font-size: 20px; }
 }
+
+
+/* ==========================================================================
+   🎧 SECRET PHONK PLAYER (FUTURISTIC LIQUID GLASS)
+   ========================================================================== */
+
+.phonk-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.player-glass {
+    background: rgba(10, 10, 30, 0.5); /* Darker glass for neon contrast */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 242, 254, 0.3);
+    border-top: 1px solid rgba(0, 242, 254, 0.6);
+    border-radius: 30px;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 242, 254, 0.1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Liquid Glow Background Animation inside the player */
+.player-glass::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, transparent 60%);
+    animation: rotateGlow 8s linear infinite;
+    z-index: -1;
+}
+@keyframes rotateGlow { 100% { transform: rotate(360deg); } }
+
+/* Spinning Disc */
+.disc {
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,0,0,0.8));
+    border: 3px solid rgba(0, 242, 254, 0.5);
+    box-shadow: 0 0 30px rgba(0, 242, 254, 0.4);
+    margin: 0 auto 30px auto;
+    display: flex; justify-content: center; align-items: center;
+    animation: spinDisc 3s linear infinite;
+    animation-play-state: paused; /* By default ruka rahega */
+}
+.disc.playing { animation-play-state: running; } /* Gaana chalne par ghumega */
+.disc-inner { width: 40px; height: 40px; background: #0a0a1a; border-radius: 50%; border: 2px solid #00f2fe; }
+@keyframes spinDisc { 100% { transform: rotate(360deg); } }
+
+/* Controls */
+.controls { display: flex; justify-content: center; align-items: center; gap: 25px; margin-top: 20px; }
+.ctrl-btn { 
+    background: rgba(0, 242, 254, 0.1); border: 1px solid rgba(0, 242, 254, 0.4); 
+    color: #fff; width: 50px; height: 50px; border-radius: 50%; 
+    cursor: pointer; font-size: 20px; transition: 0.3s; backdrop-filter: blur(5px);
+    display: flex; justify-content: center; align-items: center;
+}
+.ctrl-btn.play-pause { width: 65px; height: 65px; font-size: 24px; border-color: #00f2fe; box-shadow: 0 0 15px rgba(0, 242, 254, 0.5); }
+.ctrl-btn:hover { background: rgba(0, 242, 254, 0.3); transform: scale(1.1); box-shadow: 0 0 20px #00f2fe; }
+
+/* Futuristic Progress Bar */
+.progress-container { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 25px; cursor: pointer; position: relative; overflow: hidden; }
+.progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #00f2fe, #4facfe); border-radius: 10px; box-shadow: 0 0 10px #00f2fe; transition: width 0.1s linear; }
+
+.track-name { font-size: 22px; font-weight: bold; color: #fff; text-shadow: 0 0 10px #00f2fe; margin-bottom: 5px; }
+.track-artist { font-size: 14px; color: #b0e0e6; }
+
+
+
+
