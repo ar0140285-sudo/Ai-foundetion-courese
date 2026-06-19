@@ -1,0 +1,291 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Collection - Code Hub</title>
+    <style>
+        /* =========================================
+           🌐 GLOBAL SETTINGS
+           ========================================= */
+        body {
+            margin: 0; padding: 0;
+            background: #050505 url('assets/bg.gif') no-repeat center center fixed; /* Apni bg image set rakhna */
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .container { max-width: 1200px; margin: 40px auto; padding: 20px; }
+        .page-title { text-align: center; font-size: 36px; margin-bottom: 40px; color: #00f2fe; text-shadow: 0 0 20px rgba(0, 242, 254, 0.5); }
+
+        /* =========================================
+           🧭 3-PART NAVBAR (Left Text, Center Logo, Right Links)
+           ========================================= */
+        .old-nav {
+            display: flex; justify-content: space-between; align-items: center; padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); position: relative; z-index: 100;
+        }
+        .nav-left { font-size: 22px; font-weight: bold; color: #fff; letter-spacing: 1px; }
+        .nav-center { position: absolute; left: 50%; transform: translateX(-50%); }
+        .nav-center img { height: 40px; border-radius: 5px; }
+        .nav-right { display: flex; gap: 20px; }
+        .nav-right a { color: #fff; text-decoration: none; font-size: 16px; padding: 8px 16px; border-radius: 8px; transition: 0.3s; }
+        .nav-right a:hover, .nav-right a.active { background: rgba(255, 255, 255, 0.2); box-shadow: 0 0 10px rgba(255,255,255,0.1); }
+
+        /* =========================================
+           🗂️ LIQUID API CARDS (Left Image, Right Content)
+           ========================================= */
+        .api-list {
+            display: flex;
+            flex-direction: column; /* Ek ke niche ek aayenge */
+            gap: 40px;
+        }
+
+        .api-liquid-card {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(11px); /* Exact 11px Blur */
+            -webkit-backdrop-filter: blur(11px);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            border-radius: 20px;
+            overflow: hidden; /* Image bahar na nikle */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: all 0.4s ease;
+        }
+        .api-liquid-card:hover {
+            transform: translateY(-5px);
+            border-color: #00f2fe;
+            box-shadow: 0 20px 40px rgba(0, 242, 254, 0.2);
+        }
+
+        /* 🖼️ Left Side: Image (Aadhi Jagah) */
+        .api-img-box {
+            flex: 1; /* 50% space lega */
+            min-height: 250px;
+            background: #111; /* Agar image load na ho toh ye color dikhega */
+        }
+        .api-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Image ekdum perfect fit hogi */
+        }
+
+        /* 📝 Right Side: Content (Aadhi Jagah) */
+        .api-content {
+            flex: 1; /* 50% space lega */
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+        .api-content h2 { margin-top: 0; color: #fff; font-size: 26px; }
+        .api-content p { color: #ccc; line-height: 1.6; font-size: 15px; flex-grow: 1; /* Isse button automatically niche chala jayega */ }
+        
+        /* 🔗 Bottom Right Link */
+        .api-link {
+            align-self: flex-end; /* Ekdum right niche fix karega */
+
+
+
+
+
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid #00f2fe;
+            color: #00f2fe;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .api-link:hover {
+            background: #00f2fe; color: #000; box-shadow: 0 0 15px #00f2fe;
+        }
+
+        /* 📱 Mobile Responsiveness (Phone me upar image, niche text aayega) */
+        @media (max-width: 768px) {
+            .old-nav { flex-direction: column; gap: 15px; padding: 15px; }
+            .nav-center { position: relative; left: 0; transform: none; }
+            .api-liquid-card { flex-direction: column; } /* Phone me sidha lamba ho jayega */
+            .api-img-box { min-height: 200px; }
+            .api-link { align-self: stretch; text-align: center; } /* Phone me button poora fail jayega */
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <!-- 🧭 TOP NAVIGATION BAR -->
+    <div class="old-nav">
+        <!-- Left: Website Name -->
+        <div class="nav-left">Code Hub</div>
+        
+        <!-- Center: The "🌚" Logo -->
+        <div class="nav-center">
+            <!-- 👇 APNE CLOUD WALE LOGO KA LINK YAHAN DAALO 👇 -->
+            <img src="YAHAN_APNA_CLOUD_LINK_DAALO.jpg" alt="Code Hub Logo">
+        </div>
+        
+        <!-- Right: Navigation Links -->
+        <div class="nav-right">
+            <a href="index.html">Home</a>
+            <a href="certificates.html">Certificates</a>
+            <a href="private.html">Private</a>
+            <a href="api.html" class="active">APIs</a> <!-- Naya page add kar diya menu me -->
+        </div>
+    </div>
+
+    <!-- 🗂️ MAIN API CONTAINER -->
+    <div class="container">
+        <h1 class="page-title">🚀 Premium API Collection</h1>
+
+        <div class="api-list">
+
+            <!-- API CARD 1 -->
+            <div class="api-liquid-card">
+                <div class="api-img-box">
+                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=600" alt="Weather API">
+                </div>
+                <div class="api-content">
+                    <h2>⛅ OpenWeather API</h2>
+                    <p>Real-time weather data duniya bhar ki kisi bhi location ke liye. Isse tum apne project me live temperature, humidity, aur mausam ka hal dikha sakte ho. Ekdum easy to use aur developer-friendly.</p>
+                    <a href="#" class="api-link">Go to Link 🔗</a>
+                </div>
+            </div>
+
+            <!-- API CARD 2 -->
+            <div class="api-liquid-card">
+                <div class="api-img-box">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600" alt="Crypto API">
+                </div>
+                <div class="api-content">
+                    <h2>💰 CoinGecko Crypto API</h2>
+                    <p>Bitcoin, Ethereum aur hazaro dusri cryptocurrencies ki live prices track karne ke liye best API. Market cap, trading volume, aur coin history ka pura data yahan mil jayega.</p>
+                    <a href="#" class="api-link">Go to Link 🔗</a>
+                </div>
+            </div>
+
+            <!-- API CARD 3 -->
+            <div class="api-liquid-card">
+                <div class="api-img-box">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600" alt="Movies API">
+                </div>
+                <div class="api-content">
+                    <h2>🎬 TMDB Movie API</h2>
+                    <p>Agar apni khud ki Netflix jaisi website banani hai, toh ye API best hai. Isme sabhi nayi movies, TV shows, actors aur ratings ka massive database free me milta hai.</p>
+                    <a href="#" class="api-link">Go to Link 🔗</a>
+                </div>
+            </div>
+
+
+
+
+            <!-- API CARD 4 -->
+            <div class="api-liquid-card">
+                <div class="api-img-box">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600" alt="AI API">
+                </div>
+                <div class="api-content">
+                    <h2>🤖 OpenAI / ChatGPT API</h2>
+                    <p>Artificial Intelligence ka asli power. Apni website me smart chatbot, text generator, ya code checker dalne ke liye is API ka use karo. The future is here!</p>
+                    <a href="#" class="api-link">Go to Link 🔗</a>
+                </div>
+            </div>
+
+            <!-- API CARD 5 -->
+            <div class="api-liquid-card">
+                <div class="api-img-box">
+                    <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=600" alt="Map API">
+                </div>
+                <div class="api-content">
+                    <h2>🗺️ Mapbox Location API</h2>
+                    <p>Google Maps se bhi zyada customizable aur beautiful maps chahiye? Mapbox ka use karo. Isse tum live tracking, custom map styles aur navigation apne apps me jod sakte ho.</p>
+                    <a href="#" class="api-link">Go to Link 🔗</a>
+                </div>
+            </div>
+
+            <!-- API CARD 6 -->
+            <div class="api-liquid-card">
+                <div class="api-img-box">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600" alt="Tech API">
+                </div>
+                <div class="api-content">
+                    <h2>📰 News API</h2>
+                    <p>Duniya bhar ki breaking news apne project me laao. Is API ki madad se tum tech, sports, ya kisi bhi topic par real-time news articles nikal sakte ho.</p>
+                    <a href="#" class="api-link">Go to Link 🔗</a>
+                </div>
+            </div>
+
+            <!-- API CARD 7 -->
+            <div class="api-liquid-card">
+                <div class="api-img-box">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600" alt="Gaming API">
+                </div>
+                <div class="api-content">
+                    <h2>🎮 RAWG Video Games API</h2>
+                    <p>Games ka sabse bada database. 500,000 se zyada games ki details, release dates, screenshots, aur ratings tum is ek akeli API se nikal sakte ho. Gamers ke liye best!</p>
+                    <a href="#" class="api-link">Go to Link 🔗</a>
+                </div>
+            </div>
+
+            <!-- API CARD 8 -->
+            <div class="api-liquid-card">
+                <div class="api-img-box">
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600" alt="Social API">
+                </div>
+                <div class="api-content">
+                    <h2>💬 Discord Developer API</h2>
+                    <p>Apne khud ke custom Discord bots banao! Is API ka use karke tum server manage kar sakte ho, auto-replies set kar sakte ho, aur community tools bana sakte ho.</p>
+                    <a href="#" class="api-link">Go to Link 🔗</a>
+                </div>
+            </div>
+
+            <!-- API CARD 9 -->
+            <div class="api-liquid-card">
+                <div class="api-img-box">
+                    <img src="https://images.unsplash.com/photo-1496449903678-68ddcb189a24?auto=format&fit=crop&w=600" alt="Code API">
+                </div>
+                <div class="api-content">
+                    <h2>💻 GitHub GraphQL API</h2>
+                    <p>Developers ka ultimate tool. Github ki is API se tum kisi bhi user ki profile, unke repositories, commits aur open-source contributions ka data nikal sakte ho.</p>
+                    <a href="#" class="api-link">Go to Link 🔗</a>
+                </div>
+            </div>
+
+
+
+
+            <!-- API CARD 10 -->
+            <div class="api-liquid-card">
+                <div class="api-img-box">
+                    <img src="https://images.unsplash.com/photo-1614680376593-902f74cf0d41?auto=format&fit=crop&w=600" alt="Space API">
+                </div>
+                <div class="api-content">
+                    <h2>🚀 NASA Open APIs</h2>
+                    <p>Seedha space se data! NASA ki is free API se tum roj ek nayi space ki HD photo (APOD), Mars Rover ki images, aur asteroids ka live data track kar sakte ho.</p>
+                    <a href="#" class="api-link">Go to Link 🔗</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

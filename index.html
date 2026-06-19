@@ -19,40 +19,72 @@
         
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
+
+
+
         /* =========================================
-           🧭 PURANA MOBILE-OPTIMIZED NAVBAR
+           🧭 3-PART NAVBAR (Left Text, Center Logo, Right Links)
            ========================================= */
-       .old-nav {
+        .old-nav {
             display: flex;
-            justify-content: flex-end; /* 👈 Yahan 'center' ko 'flex-start' kar diya */
+            justify-content: space-between; /* Teeno cheezon ko alag-alag kone me bhejega */
             align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 15px 30px; /* 👈 Left se thoda padding de di taaki chipka na rahe */
-            background: rgba(236, 222, 222, 0.753);
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(238, 0, 0, 0.884);
-        }
-
-
-        .old-nav a {
-            color: #af7575c2;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
-        .old-nav a:hover, .old-nav a.active {
-            background: rgba(187, 145, 145, 0.856);
-            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative; /* Center logo ke liye zaroori */
         }
         
-        /* Mobile ke liye ekdum fit */
-        @media (max-width: 600px) {
-            .old-nav { gap: 10px; padding: 10px; }
-            .old-nav a { font-size: 14px; padding: 6px 12px; }
+        /* 👈 Left Side: Website Name */
+        .nav-left {
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 1px;
         }
+
+        /* 🎯 Center: Logo */
+        .nav-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); /* Ekdum center me fix karne ke liye */
+        }
+        .nav-center img {
+            height: 40px; /* Logo ka size yahan se adjust kar sakte ho */
+            border-radius: 5px;
+        }
+
+        /* 👉 Right Side: Links */
+        .nav-right {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-right a {
+            color: #fff; text-decoration: none; font-size: 16px;
+            padding: 8px 16px; border-radius: 8px; transition: 0.3s;
+        }
+        .nav-right a:hover, .nav-right a.active {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+
+        /* 📱 Mobile Adjustments */
+        @media (max-width: 768px) {
+            .old-nav {
+                flex-direction: column;
+                justify-content: center;
+                gap: 15px;
+                padding: 15px;
+            }
+            .nav-center {
+                position: relative;
+                left: 0;
+                transform: none;
+            }
+        }
+
+
 
         /* =========================================
            🔍 GOOGLE-LEVEL SEARCH BAR
@@ -192,16 +224,91 @@
             cursor: pointer; transition: 0.3s;
         }
         .feedback-form button:hover { box-shadow: 0 0 20px #eb0b0b; }
+
+
+
+
+
+
+
+/* =========================================
+           👇 BOTTOM PAGE LINKS (Future-Proof Hub)
+           ========================================= */
+        .bottom-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Agar zyada button hue toh apne aap niche wali line me aayenge */
+            gap: 15px;
+            margin: 40px auto;
+            max-width: 800px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+        
+        .bottom-nav a {
+            flex: 1; /* 👈 Ye magic rule hai! Ye automatically barabar jagah baant lega */
+            text-align: center;
+            min-width: 150px; /* Button isse chhota nahi hoga */
+            padding: 15px 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 10px;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .bottom-nav a:hover {
+            background: #00f2fe;
+            color: #000;
+            box-shadow: 0 0 15px #00f2fe;
+            transform: translateY(-3px);
+        }
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
 
-    <!-- 🧭 TOP NAVIGATION BAR (Old Mobile-Optimized Design) -->
+    <body>
+
+    <!-- 🧭 TOP NAVIGATION BAR -->
     <div class="old-nav">
-        <a href="index.html" class="active">Home</a>
-        <a href="certificates.html">Certificates</a>
-        <a href="private.html">Private</a>
+        
+        <!-- Left: Website Name -->
+        <div class="nav-left">
+            Code Hub
+        </div>
+
+        <!-- Center: Logo -->
+        <div class="nav-center">
+            <img src="https://res.cloudinary.com/defb0pgcs/image/upload/v1781850573/6172458713139057162_120_jxanjh.jpg" alt="Code Hub Logo">
+        </div>
+
+        <!-- Right: Links -->
+        <div class="nav-right">
+            <a href="index.html" class="active">Home</a>
+            <a href="certificates.html">Certificates</a>
+            <a href="private.html">Private</a>
+        </div>
+
     </div>
+
+    <div class="container">
+
+
 
     <div class="container">
         
@@ -256,6 +363,20 @@ Anyone who wants to create attractive websites  </p>"
 
         </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!-- ✉️ FEEDBACK SECTION -->
         <div class="feedback-section glass-card" style="max-width: 600px; width: 100%; margin-left: auto; margin-right: auto; order: 3;">
             <h3 style="text-align: center; margin-top: 0;">💬 Suggest an Improvement</h3>
@@ -270,6 +391,20 @@ Anyone who wants to create attractive websites  </p>"
         </div>
 
     </div>
+
+
+
+<div class="bottom-nav">
+            <a href="api.html">🚀 Free APIs</a>
+            
+            </div>
+
+    </div> 
+
+
+
+
+
 
     <!-- ⚙️ JAVASCRIPT LOGIC -->
     <script>
