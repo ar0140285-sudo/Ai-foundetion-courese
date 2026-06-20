@@ -401,22 +401,41 @@ Anyone who wants to create attractive websites  </p>"
 
 
 <!-- 🔐 EMAIL & PASSWORD LOGIN BOX -->
-<div style="max-width: 400px; margin: 30px auto; padding: 20px; text-align: center; background: #111; border: 2px solid #00f2fe; border-radius: 10px; box-shadow: 0 0 15px #00f2fe55;">
+<div style="max-width: 400px; margin: 40px auto; padding: 30px 20px; text-align: center; 
+            background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(25px); 
+            -webkit-backdrop-filter: blur(25px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 15px; 
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);">
     
-    <h3 style="color: white; margin-bottom: 10px;">🔑 Code Hub Login</h3>
+    <img src="TUMHARA_LOGO_KA_NAAM.png" alt="Code Hub Logo" style="height: 60px; margin-bottom: 20px; object-fit: contain;">
     
-    <input type="email" id="emailInput" placeholder="Apna Email daalo" style="width: 90%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #00f2fe; background: #222; color: white;">
-    
-    <input type="password" id="passInput" placeholder="Password daalo (min 6 letters)" style="width: 90%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #00f2fe; background: #222; color: white;">
-    
-    <div style="display: flex; justify-content: space-around; margin-top: 15px;">
-        <button onclick="signUpUser()" style="padding: 10px 15px; background: #222; border: 1px solid #00f2fe; color: #00f2fe; border-radius: 5px; cursor: pointer; font-weight: bold;">Naya Account Banao</button>
-        <button onclick="loginUser()" style="padding: 10px 25px; background: #00f2fe; border: none; color: black; font-weight: bold; border-radius: 5px; cursor: pointer;">Login</button>
+    <div style="display: flex; justify-content: center; margin-bottom: 20px; background: rgba(0,0,0,0.3); border-radius: 8px; padding: 5px;">
+        <button id="tabLogin" onclick="switchTab('login')" style="flex: 1; padding: 10px; border: none; background: #00f2fe; color: black; font-weight: bold; border-radius: 5px; cursor: pointer;">Login</button>
+        <button id="tabSignup" onclick="switchTab('signup')" style="flex: 1; padding: 10px; border: none; background: transparent; color: white; font-weight: bold; border-radius: 5px; cursor: pointer;">Sign Up</button>
+    </div>
+
+    <div id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Apna Email daalo" style="width: 90%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid rgba(0, 242, 254, 0.4); background: rgba(0, 0, 0, 0.4); color: white; outline: none;">
+        
+        <input type="password" id="loginPass" placeholder="Password daalo" style="width: 90%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid rgba(0, 242, 254, 0.4); background: rgba(0, 0, 0, 0.4); color: white; outline: none;">
+        
+        <button onclick="loginUser()" style="width: 95%; margin-top: 15px; padding: 12px; background: #00f2fe; border: none; color: black; font-weight: bold; border-radius: 8px; cursor: pointer; box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);">Login Karo</button>
+    </div>
+
+    <div id="signupForm" style="display: none;">
+        <input type="email" id="signupEmail" placeholder="Naya Email daalo" style="width: 90%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid rgba(0, 242, 254, 0.4); background: rgba(0, 0, 0, 0.4); color: white; outline: none;">
+        
+        <input type="password" id="signupPass" placeholder="Password banao (min 6 letters)" style="width: 90%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid rgba(0, 242, 254, 0.4); background: rgba(0, 0, 0, 0.4); color: white; outline: none;">
+        
+        <input type="password" id="signupConfirmPass" placeholder="Wapas Password daalo" style="width: 90%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid rgba(0, 242, 254, 0.4); background: rgba(0, 0, 0, 0.4); color: white; outline: none;">
+        
+        <button onclick="signUpUser()" style="width: 95%; margin-top: 15px; padding: 12px; background: transparent; border: 1px solid #00f2fe; color: #00f2fe; font-weight: bold; border-radius: 8px; cursor: pointer;">Naya Account Banao</button>
     </div>
     
-    <p id="loginMessage" style="color: yellow; margin-top: 15px; font-size: 14px; font-weight: bold;"></p>
+    <p id="loginMessage" style="color: #00f2fe; margin-top: 15px; font-size: 14px; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.5);"></p>
 </div>
-
 
 
 
@@ -442,84 +461,7 @@ Anyone who wants to create attractive websites  </p>"
 
     <!-- ⚙️ JAVASCRIPT LOGIC -->
     <script>
-        // --- 1. PIN (📌) FUNCTIONALITY ---
-        function togglePin(btn) {
-            const card = btn.parentElement;
-            card.classList.toggle('pinned');
-        }
-
-        // --- 2. ADVANCED SEARCH & RECOMMENDATION ---
-        const searchInput = document.getElementById('devSearch');
-        const suggestionsBox = document.getElementById('suggestions');
-        const cards = document.querySelectorAll('.glass-card'); 
-        
-        let searchableItems = [];
-        cards.forEach(card => {
-            if(card.hasAttribute('data-title')) {
-                searchableItems.push({
-                    title: card.getAttribute('data-title'),
-                    element: card
-                });
-            }
-        });
-
-        searchInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase().trim();
-            suggestionsBox.innerHTML = ''; 
-            
-            if (query === '') {
-                suggestionsBox.style.display = 'none';
-                cards.forEach(card => card.style.display = 'block');
-                return;
-            }
-
-            const matches = searchableItems.filter(item => item.title.toLowerCase().includes(query));
-
-            if (matches.length > 0) {
-                suggestionsBox.style.display = 'block';
-
-
-
-
-
-                matches.forEach(match => {
-                    const div = document.createElement('div');
-                    div.className = 'suggestion-item';
-                    const regex = new RegExp("(" + query + ")", "gi");
-                    div.innerHTML = match.title.replace(regex, "<span style='color:#00f2fe; font-weight:bold;'>$1</span>");
-                    
-                    div.onclick = () => {
-                        searchInput.value = match.title;
-                        suggestionsBox.style.display = 'none';
-                        filterCards(match.title.toLowerCase());
-                        match.element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        match.element.style.transform = 'scale(1.05)';
-                        setTimeout(() => match.element.style.transform = 'translateY(0)', 500);
-                    };
-                    suggestionsBox.appendChild(div);
-                });
-            } else {
-                suggestionsBox.style.display = 'none';
-            }
-
-            filterCards(query);
-        });
-
-        document.addEventListener('click', function(e) {
-            if (e.target !== searchInput) {
-                suggestionsBox.style.display = 'none';
-            }
-        });
-
-        function filterCards(query) {
-            searchableItems.forEach(item => {
-                if (item.title.toLowerCase().includes(query)) {
-                    item.element.style.display = 'block';
-                } else {
-                    item.element.style.display = 'none';
-                }
-            });
-        }
+    
     </script>
 
 
@@ -543,14 +485,49 @@ Anyone who wants to create attractive websites  </p>"
 
 
 // =========================================
-// 🔐 LOGIN & SIGNUP LOGIC
+// 🔐 SMART LOGIN & SIGNUP LOGIC
 // =========================================
 
-// 1. Naya Account Banane ka Function (Sign Up)
-async function signUpUser() {
-    const email = document.getElementById('emailInput').value;
-    const password = document.getElementById('passInput').value;
+// Tab switch karne ka function (UI Change)
+function switchTab(tabName) {
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const tabLogin = document.getElementById('tabLogin');
+    const tabSignup = document.getElementById('tabSignup');
     const msgBox = document.getElementById('loginMessage');
+    
+    msgBox.innerText = ""; // Message clear kar do
+
+    if (tabName === 'login') {
+        loginForm.style.display = 'block';
+        signupForm.style.display = 'none';
+        tabLogin.style.background = '#00f2fe';
+        tabLogin.style.color = 'black';
+        tabSignup.style.background = 'transparent';
+        tabSignup.style.color = 'white';
+    } else {
+        loginForm.style.display = 'none';
+        signupForm.style.display = 'block';
+        tabSignup.style.background = '#00f2fe';
+        tabSignup.style.color = 'black';
+        tabLogin.style.background = 'transparent';
+        tabLogin.style.color = 'white';
+    }
+}
+
+// 1. Naya Account Banane ka Function (Double Password Check)
+async function signUpUser() {
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPass').value;
+    const confirmPassword = document.getElementById('signupConfirmPass').value;
+    const msgBox = document.getElementById('loginMessage');
+
+    // Password Match Check karega
+    if (password !== confirmPassword) {
+        msgBox.innerText = "⚠️ Dono password match nahi kar rahe hain!";
+        msgBox.style.color = "yellow";
+        return;
+    }
 
     if (password.length < 6) {
         msgBox.innerText = "⚠️ Password kam se kam 6 letters ka hona chahiye!";
@@ -561,7 +538,6 @@ async function signUpUser() {
     msgBox.innerText = "⏳ Account ban raha hai...";
     msgBox.style.color = "white";
     
-    // Supabase ka Sign Up function
     const { data, error } = await supabaseClient.auth.signUp({
         email: email,
         password: password,
@@ -571,15 +547,20 @@ async function signUpUser() {
         msgBox.innerText = "❌ Error: " + error.message;
         msgBox.style.color = "red";
     } else {
-        msgBox.innerText = "✅ Account ban gaya! Ab tum andar ho.";
+        msgBox.innerText = "✅ Account ban gaya! Ab tum Login kar sakte ho.";
         msgBox.style.color = "#00f2fe";
+        // Successful signup ke baad form clear kar dena chahiye
+        document.getElementById('signupEmail').value = "";
+        document.getElementById('signupPass').value = "";
+        document.getElementById('signupConfirmPass').value = "";
+        setTimeout(() => switchTab('login'), 2000); // 2 second baad automatically login tab pe le jayega
     }
 }
 
-// 2. Purane Account se Login karne ka Function (Sign In)
+// 2. Login Function
 async function loginUser() {
-    const email = document.getElementById('emailInput').value;
-    const password = document.getElementById('passInput').value;
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPass').value;
     const msgBox = document.getElementById('loginMessage');
 
     if (!email || !password) {
@@ -591,7 +572,6 @@ async function loginUser() {
     msgBox.innerText = "⏳ Login ho raha hai...";
     msgBox.style.color = "white";
 
-    // Supabase ka Sign In function
     const { data, error } = await supabaseClient.auth.signInWithPassword({
         email: email,
         password: password,

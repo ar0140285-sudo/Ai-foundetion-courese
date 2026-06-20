@@ -114,21 +114,42 @@
             .api-link { align-self: stretch; text-align: center; } /* Phone me button poora fail jayega */
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </style>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+    const supabaseUrl = 'https://hjhxgteankpsdereuxyf.supabase.co';
+    const supabaseKey = 'sb_publishable_ig8ppBkwfjTNmI5XZZh5mw_u7NQGDkB';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // 🕵️‍♂️ Chowkidar Function
+    async function checkUserLogin() {
+        // Supabase se pucho ki kya koi user login hai?
+        const { data: { session } } = await supabaseClient.auth.getSession();
+
+        // Agar session NAHI hai (matlab user login nahi hai)
+        if (!session) {
+            alert("⚠️ Pehle login karo bhai, tabhi APIs dikhega!");
+            window.location.href = "index.html"; // Seedha wapas bhej do home page par
+        }
+    }
+
+    // Page load hote hi turant check karo
+    checkUserLogin();
+</script>
+
+
+
+
+
+
+
 </head>
 <body>
 
