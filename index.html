@@ -394,6 +394,40 @@ Anyone who wants to create attractive websites  </p>"
 
 
 
+
+
+
+
+
+
+<!-- 🔐 EMAIL & PASSWORD LOGIN BOX -->
+<div style="max-width: 400px; margin: 30px auto; padding: 20px; text-align: center; background: #111; border: 2px solid #00f2fe; border-radius: 10px; box-shadow: 0 0 15px #00f2fe55;">
+    
+    <h3 style="color: white; margin-bottom: 10px;">🔑 Code Hub Login</h3>
+    
+    <input type="email" id="emailInput" placeholder="Apna Email daalo" style="width: 90%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #00f2fe; background: #222; color: white;">
+    
+    <input type="password" id="passInput" placeholder="Password daalo (min 6 letters)" style="width: 90%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #00f2fe; background: #222; color: white;">
+    
+    <div style="display: flex; justify-content: space-around; margin-top: 15px;">
+        <button onclick="signUpUser()" style="padding: 10px 15px; background: #222; border: 1px solid #00f2fe; color: #00f2fe; border-radius: 5px; cursor: pointer; font-weight: bold;">Naya Account Banao</button>
+        <button onclick="loginUser()" style="padding: 10px 25px; background: #00f2fe; border: none; color: black; font-weight: bold; border-radius: 5px; cursor: pointer;">Login</button>
+    </div>
+    
+    <p id="loginMessage" style="color: yellow; margin-top: 15px; font-size: 14px; font-weight: bold;"></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="bottom-nav">
             <a href="api.html">🚀 Free APIs</a>
             
@@ -505,6 +539,74 @@ Anyone who wants to create attractive websites  </p>"
         const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
         
         console.log("Supabase successfully connected! 🚀");
+
+
+
+// =========================================
+// 🔐 LOGIN & SIGNUP LOGIC
+// =========================================
+
+// 1. Naya Account Banane ka Function (Sign Up)
+async function signUpUser() {
+    const email = document.getElementById('emailInput').value;
+    const password = document.getElementById('passInput').value;
+    const msgBox = document.getElementById('loginMessage');
+
+    if (password.length < 6) {
+        msgBox.innerText = "⚠️ Password kam se kam 6 letters ka hona chahiye!";
+        msgBox.style.color = "yellow";
+        return;
+    }
+
+    msgBox.innerText = "⏳ Account ban raha hai...";
+    msgBox.style.color = "white";
+    
+    // Supabase ka Sign Up function
+    const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+    });
+
+    if (error) {
+        msgBox.innerText = "❌ Error: " + error.message;
+        msgBox.style.color = "red";
+    } else {
+        msgBox.innerText = "✅ Account ban gaya! Ab tum andar ho.";
+        msgBox.style.color = "#00f2fe";
+    }
+}
+
+// 2. Purane Account se Login karne ka Function (Sign In)
+async function loginUser() {
+    const email = document.getElementById('emailInput').value;
+    const password = document.getElementById('passInput').value;
+    const msgBox = document.getElementById('loginMessage');
+
+    if (!email || !password) {
+        msgBox.innerText = "⚠️ Pehle Email aur Password daalo!";
+        msgBox.style.color = "yellow";
+        return;
+    }
+
+    msgBox.innerText = "⏳ Login ho raha hai...";
+    msgBox.style.color = "white";
+
+    // Supabase ka Sign In function
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password,
+    });
+
+    if (error) {
+        msgBox.innerText = "❌ Login Fail: " + error.message;
+        msgBox.style.color = "red";
+    } else {
+        msgBox.innerText = "✅ Welcome Back, Boss! 🚀";
+        msgBox.style.color = "#00f2fe";
+    }
+}
+
+
     </script>
 
 </body>
